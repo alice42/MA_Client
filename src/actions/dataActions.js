@@ -1,0 +1,11 @@
+export const CONSTANTS = {
+  REALTORS_REQUEST: 'REALTORS_REQUEST',
+  REALTORS_SUCCESS: 'REALTORS_SUCCESS',
+  REALTORS_FAILURE: 'REALTORS_FAILURE'
+}
+
+export const getRealtors = () => {
+  return {
+    type: CONSTANTS.REALTORS_REQUEST
+  }
+}
