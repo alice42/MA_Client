@@ -5,9 +5,11 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './Navbar.styles'
 
+import Dropdown from '../Dropdown'
+
 const useStyles = makeStyles(styles)
 
-export default function Navbar() {
+export default function Navbar(props) {
   const classes = useStyles()
 
   return (
@@ -22,6 +24,7 @@ export default function Navbar() {
           material example
         </Typography>
         <div className={classes.flex} />
+        <Dropdown {...props} />
       </Toolbar>
     </AppBar>
   )

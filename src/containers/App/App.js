@@ -13,6 +13,7 @@ const App = props => (
     <LayoutConnected>
       <Switch>
         <Route exact path={'/'} component={HomeConnected} />
+        <Route exact path={'/:realtorsId'} component={HomeConnected} />
         <Redirect to="/" />
       </Switch>
     </LayoutConnected>
