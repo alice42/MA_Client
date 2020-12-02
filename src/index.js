@@ -10,6 +10,11 @@ import mainReducer from './reducers/mainReducer'
 import rootSaga from './sagas/rootSaga'
 import App from './containers/App'
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import ThemeSettings from './theme'
+
+const theme = createMuiTheme(ThemeSettings)
+
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [sagaMiddleware]
 
@@ -21,8 +26,10 @@ const store = createStore(
 sagaMiddleware.run(rootSaga)
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <MuiThemeProvider theme={theme}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root')
 )
