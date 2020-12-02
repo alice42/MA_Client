@@ -3,7 +3,13 @@ import { CONSTANTS } from '../actions/dataActions'
 const initialState = {
   allRealtors: null,
   errorRealtors: null,
-  fetching: false
+  fetching: false,
+  currentRealtor: {
+    id: null,
+    messages: null,
+    fetching: false,
+    errorCurrentRealtor: null
+  }
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +29,28 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         fetching: false
+      }
+    case CONSTANTS.MESSAGES_REQUEST:
+      return {
+        ...state,
+        currentRealtor: {
+          fetching: true
+        }
+      }
+    case CONSTANTS.MESSAGES_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        currentRealtor: {
+          messages: action.results
+        }
+      }
+    case CONSTANTS.MESSAGES_FAILURE:
+      return {
+        ...state,
+        currentRealtor: {
+          fetching: true
+        }
       }
     default:
       return state

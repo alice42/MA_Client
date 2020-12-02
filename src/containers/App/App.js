@@ -30,7 +30,8 @@ const mapStateToProps = state => {
   const { data } = state
   return {
     allRealtors: data.allRealtors,
-    realtors: data
+    realtors: data,
+    currentRealtor: data.currentRealtor
   }
 }
 

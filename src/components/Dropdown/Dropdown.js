@@ -1,20 +1,21 @@
 import React from 'react'
-import { useHistory, useLocation, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function Dropdown(props) {
   const history = useHistory()
-  const aaa = useParams()
-
   const paramsId = history.location.pathname.substring(1)
 
   const [value, setValue] = React.useState()
 
   React.useEffect(() => {
     if (paramsId && props.allRealtors) {
-      const a = props.allRealtors.find(a => `${a.id}` === paramsId)
+      const realtorId = props.allRealtors.find(a => `${a.id}` === paramsId)
         ? paramsId
         : 'realtors'
-      setValue(a)
+      setValue(realtorId)
+    } else if (!paramsId && props.allRealtors) {
+      const realtorId = props.allRealtors[0]
+      setValue(realtorId)
     }
   })
 

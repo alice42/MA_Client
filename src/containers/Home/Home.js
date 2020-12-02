@@ -20,20 +20,33 @@ function Home(props) {
 
   React.useEffect(() => {
     if (paramsId && props.allRealtors) {
-      const a = props.allRealtors.find(a => `${a.id}` === paramsId)
-      setRealtor(a)
+      const realtor = props.allRealtors.find(a => `${a.id}` === paramsId)
+      setRealtor(realtor)
+    } else if (!paramsId && props.allRealtors) {
+      const realtor = props.allRealtors[0]
+      setRealtor(realtor)
     }
   })
 
   React.useEffect(() => {
-    console.log('REACLTOR ID CHANGED', realtor)
-    // realtor && props.dataActions.getMessages(realtor.id)
+    realtor && props.dataActions.getMessages(realtor.id)
   }, [realtor])
 
   return (
     <div className={classes.root}>
       <div className={classes.section}>
-        {realtor && <div>ID: {realtor.id}</div>}
+        {realtor && (
+          <div>
+            ID: {realtor.id}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {props.currentRealtor.messages &&
+                !props.currentRealtor.fetching &&
+                props.currentRealtor.messages.map(message => (
+                  <div key={message.id}>{message.id}</div>
+                ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
