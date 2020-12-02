@@ -5,13 +5,12 @@ import styles from './Layout.styles'
 
 const useStyles = makeStyles(styles)
 
-function Layout({ children }) {
+function Layout(props) {
   const classes = useStyles()
-
   return (
     <div className={classes.container}>
-      <Navbar />
-      <div className={classes.children}>{children}</div>
+      <Navbar {...props} />
+      <div className={classes.children}>{props.children}</div>
     </div>
   )
 }
