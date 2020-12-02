@@ -28,7 +28,8 @@ const actionsMapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   const { data } = state
   return {
-    data
+    allRealtors: data.allRealtors,
+    realtors: data
   }
 }
 
