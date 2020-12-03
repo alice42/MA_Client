@@ -29,7 +29,12 @@ class MessagesList extends Component {
           hasMore={hasMore}
         >
           {messages.map(message => (
-            <Post key={message.id} message={message} />
+            <Post
+              {...this.props}
+              key={message.id}
+              message={message}
+              realtorId={this.props.realtor.id}
+            />
           ))}
         </ReduxLazyScroll>
         <div>
