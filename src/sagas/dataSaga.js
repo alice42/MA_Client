@@ -1,8 +1,10 @@
-import { call, put, takeEvery, all } from 'redux-saga/effects'
+import { call, put, takeEvery, all, select } from 'redux-saga/effects'
 import { CONSTANTS } from '../actions/dataActions'
 import {
   getRealtorsMethod,
-  fetchMessagesMethod
+  fetchMessagesMethod,
+  getMessageMethod,
+  markAsReadMethod
 } from '../services/dataServices'
 
 import {
@@ -30,6 +32,33 @@ function* getRealtors(action) {
   }
 }
 
+function* getMessage(action) {
+  try {
+    const payload = {
+      realtorId: action.realtorId,
+      messageId: action.messageId
+    }
+    const response = yield call(getMessageMethod, payload)
+    if (response.status === 200) {
+      yield put({
+        type: CONSTANTS.MESSAGE_SUCCESS,
+        results: JSON.parse(response.data),
+        ids: {
+          realtorId: payload.realtorId,
+          messageId: payload.messageId
+        }
+      })
+    } else {
+      yield put({
+        type: CONSTANTS.MESSAGE_FAILURE,
+        error: JSON.parse(response.data)
+      })
+    }
+  } catch (error) {
+    yield put({ type: CONSTANTS.MESSAGE_FAILURE, error: error.message })
+  }
+}
+
 function* fetchMessages(action) {
   try {
     const payload = {
@@ -46,6 +75,7 @@ function* fetchMessages(action) {
     yield put(requestError(error.message))
   }
 }
+
 function* updatePageToFetch(action) {
   try {
     const payload = {
@@ -57,10 +87,38 @@ function* updatePageToFetch(action) {
   }
 }
 
+function* markAsRead(action) {
+  try {
+    const payload = {
+      realtorId: action.ids.realtorId,
+      messageId: action.ids.messageId,
+      message: action.results
+    }
+    console.log('AAA', payload)
+    const response = yield call(markAsReadMethod, payload)
+    console.log(JSON.parse(response.data))
+    if (response.status === 200) {
+      yield put({
+        type: CONSTANTS.MESSAGE_READ_SUCCESS,
+        results: JSON.parse(response.data)
+      })
+    } else {
+      yield put({
+        type: CONSTANTS.MESSAGE_READ_FAILURE,
+        error: JSON.parse(response.data)
+      })
+    }
+  } catch (error) {
+    yield put({ type: CONSTANTS.MESSAGE_READ_FAILURE, error: error.message })
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     yield takeEvery(CONSTANTS.REALTORS_REQUEST, getRealtors),
     yield takeEvery(CONSTANTS.FETCH_MESSAGES, fetchMessages),
-    yield takeEvery(CONSTANTS.FETCH_MESSAGES, updatePageToFetch)
+    yield takeEvery(CONSTANTS.FETCH_MESSAGES, updatePageToFetch),
+    yield takeEvery(CONSTANTS.MESSAGE_REQUEST, getMessage),
+    yield takeEvery(CONSTANTS.MESSAGE_SUCCESS, markAsRead)
   ])
 }

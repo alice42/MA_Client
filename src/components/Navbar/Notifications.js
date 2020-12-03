@@ -10,6 +10,7 @@ function Menu(props) {
   const classes = useStyles()
   const history = useHistory()
   const paramsRealtorId = history.location.pathname.split('/')[2]
+  const paramsMessageId = history.location.pathname.split('/')[2]
 
   const [value, setValue] = React.useState()
 
@@ -24,6 +25,10 @@ function Menu(props) {
       setValue(realtorId)
     }
   })
+
+  React.useEffect(() => {
+    console.log('value', value)
+  }, [paramsMessageId])
 
   if (value)
     return (

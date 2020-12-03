@@ -5,7 +5,14 @@ export const CONSTANTS = {
   MESSAGES_REQUEST: 'MESSAGES_REQUEST',
   MESSAGES_SUCCESS: 'MESSAGES_SUCCESS',
   MESSAGES_FAILURE: 'MESSAGES_FAILURE',
-  FETCH_MESSAGES: 'FETCH_MESSAGES'
+  MESSAGE_REQUEST: 'MESSAGE_REQUEST',
+  MESSAGE_SUCCESS: 'MESSAGE_SUCCESS',
+  MESSAGE_FAILURE: 'MESSAGE_FAILURE',
+  MESSAGE_READ_REQUEST: 'MESSAGE_READ_REQUEST',
+  MESSAGE_READ_SUCCESS: 'MESSAGE_READ_SUCCESS',
+  MESSAGE_READ_FAILURE: 'MESSAGE_READ_FAILURE',
+  FETCH_MESSAGES: 'FETCH_MESSAGES',
+  CLEAN_MESSAGES: 'CLEAN_MESSAGES'
 }
 
 export const getRealtors = () => {
@@ -20,7 +27,6 @@ export const requestError = error => ({
 })
 
 export const messagesSuccess = messages => {
-  console.log(messages)
   return {
     type: CONSTANTS.MESSAGES_SUCCESS,
     messages,
@@ -40,5 +46,27 @@ export const fetchMessages = (pageIndex, realtorId) => {
     type: CONSTANTS.FETCH_MESSAGES,
     pageIndex,
     realtorId
+  }
+}
+
+export const cleanMessages = () => {
+  return {
+    type: CONSTANTS.CLEAN_MESSAGES
+  }
+}
+
+export const getMessage = (realtorId, messageId) => {
+  return {
+    type: CONSTANTS.MESSAGE_REQUEST,
+    realtorId,
+    messageId
+  }
+}
+
+export const markMessageRead = (realtorId, messageId) => {
+  return {
+    type: CONSTANTS.MESSAGE_READ_REQUEST,
+    realtorId,
+    messageId
   }
 }

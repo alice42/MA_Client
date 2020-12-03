@@ -1,31 +1,43 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './Navbar.styles'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 
-import Dropdown from '../Dropdown'
+import { ReactComponent as Logo } from '../../assets/logo-meilleursagentspro-neg.svg'
+
+import Menu from './Menu'
+import Notifications from './Notifications'
 
 const useStyles = makeStyles(styles)
+
+function ElevationScroll(props) {
+  const { children, window } = props
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined
+  })
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0
+  })
+}
 
 export default function Navbar(props) {
   const classes = useStyles()
 
   return (
-    <AppBar position="static" className={classes.appBar}>
+    // <ElevationScroll {...props}>
+    <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <Typography
-          color="inherit"
-          variant="h6"
-          className={classes.brand}
-          data-test="brand"
-        >
-          material example
-        </Typography>
+        <Logo className={classes.logo} />
+        <Notifications {...props} />
         <div className={classes.flex} />
-        <Dropdown {...props} />
+        <Menu {...props} />
       </Toolbar>
     </AppBar>
+    // </ElevationScroll>
   )
 }

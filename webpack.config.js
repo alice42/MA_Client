@@ -27,10 +27,14 @@ module.exports = {
         include: __dirname + '/src',
       },
       {
+        test: /\.svg$/,
+        use: ['babel-loader', '@svgr/webpack'],
+      },
+      {
         test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
         loader: 'url-loader?limit=100000'
       },
     ]
   },
-  plugins: [new hwp({ template: path.join(__dirname, '/src/index.html') })]
+  plugins: [new hwp({  favicon: path.join(__dirname, '/src/assets/favicon/ms-icon-310x310.ico'), template: path.join(__dirname, '/src/index.html') })]
 }

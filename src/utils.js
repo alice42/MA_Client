@@ -1,20 +1,19 @@
 export const todayStr = new Date().toISOString().replace(/T.*$/, '')
 
-export const dateString = (when, type) => {
-  if (
-    new Date(when).getDate() === new Date(todayStr).getDate() + 1 &&
-    type !== 'deadline'
-  )
-    return 'Tomorrow'
-  else if (
-    new Date(when).getDate() === new Date(todayStr).getDate() &&
-    type !== 'deadline'
-  ) {
+export const dateString = when => {
+  if (new Date(when).getDate() === new Date(todayStr).getDate() - 1)
+    return 'Hier'
+  else if (new Date(when).getDate() === new Date(todayStr).getDate()) {
     return new Date(when).toLocaleTimeString(navigator.language, {
       hour: '2-digit',
       minute: '2-digit'
     })
-  } else return new Date(when).toDateString()
+  } else
+    return new Date(when).toLocaleString(navigator.language, {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    })
 }
 
 export const daysFromToday = endDate => {

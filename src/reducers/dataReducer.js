@@ -1,16 +1,20 @@
 import { CONSTANTS } from '../actions/dataActions'
 
 const initialState = {
+  message: {
+    isFetching: false,
+    errorMessage: ''
+  },
   realtorMessages: {
     isFetching: false,
     messages: [],
-    errorMessage: '',
+    errorMessages: '',
     pageIndex: 1,
     hasMore: true
   },
   allRealtors: null,
   errorRealtors: null,
-  fetching: false
+  isFetching: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -18,18 +22,18 @@ const reducer = (state = initialState, action) => {
     case CONSTANTS.REALTORS_REQUEST:
       return {
         ...state,
-        fetching: true
+        isFetching: true
       }
     case CONSTANTS.REALTORS_SUCCESS:
       return {
         ...state,
         allRealtors: action.results,
-        fetching: false
+        isFetching: false
       }
     case CONSTANTS.REALTORS_FAILURE:
       return {
         ...state,
-        fetching: false
+        isFetching: false
       }
     case CONSTANTS.MESSAGES_REQUEST:
       return {
@@ -56,10 +60,37 @@ const reducer = (state = initialState, action) => {
         ...state,
         realtorMessages: {
           isFetching: false,
-          errorMessage: action.errorMessage,
+          errorMessages: action.errorMessage,
           hasMore: false
         }
       }
+    case CONSTANTS.MESSAGE_REQUEST:
+      return {
+        ...state,
+        message: {
+          ...state.message,
+          isFetching: true
+        }
+      }
+    case CONSTANTS.MESSAGE_SUCCESS:
+      return {
+        ...state,
+        message: {
+          ...action.results,
+          isFetching: false
+        }
+      }
+    case CONSTANTS.MESSAGE_FAILURE:
+      return {
+        ...state,
+        message: {
+          ...state.message,
+          isFetching: false
+        }
+      }
+    case CONSTANTS.CLEAN_MESSAGES:
+      return initialState
+
     default:
       return state
   }

@@ -27,6 +27,8 @@ class MessagesList extends Component {
           errorMessage={errorMessage}
           loadMore={this.loadMessages}
           hasMore={hasMore}
+          isParentScrollable={true}
+          parentHeight={'calc(100vh - 67px)'}
         >
           {messages.map(message => (
             <Post
@@ -37,15 +39,6 @@ class MessagesList extends Component {
             />
           ))}
         </ReduxLazyScroll>
-        <div>
-          {isFetching && <div> Loading more messages... </div>}
-
-          {!hasMore && !errorMessage && (
-            <div>All the messages has been loaded successfully.</div>
-          )}
-
-          {errorMessage && <div>{errorMessage}</div>}
-        </div>
       </div>
     )
   }
