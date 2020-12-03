@@ -4,6 +4,7 @@ export const api = 'http://34.76.140.183'
 export const realtors = '/realtors/'
 export const messages = '/messages/'
 
+export const page = '?page='
 //BASIC FETCH API METHOD
 export const basicFetch = async (method, url, config, data) => {
   try {

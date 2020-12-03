@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 function Dropdown(props) {
   const history = useHistory()
-  const paramsId = history.location.pathname.substring(1)
+  const paramsId = parseInt(history.location.pathname)
 
   const [value, setValue] = React.useState()
 

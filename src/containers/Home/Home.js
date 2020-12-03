@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './Home.styles'
+import MessagesList from '../../components/Messages/MessagesList'
 
 const useStyles = makeStyles(styles)
 
@@ -28,25 +29,10 @@ function Home(props) {
     }
   })
 
-  React.useEffect(() => {
-    realtor && props.dataActions.getMessages(realtor.id)
-  }, [realtor])
-
   return (
     <div className={classes.root}>
       <div className={classes.section}>
-        {realtor && (
-          <div>
-            ID: {realtor.id}
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {props.currentRealtor.messages &&
-                !props.currentRealtor.fetching &&
-                props.currentRealtor.messages.map(message => (
-                  <div key={message.id}>{message.id}</div>
-                ))}
-            </div>
-          </div>
-        )}
+        {realtor && <MessagesList {...props} realtor={realtor} />}
       </div>
     </div>
   )

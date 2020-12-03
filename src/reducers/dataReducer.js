@@ -1,15 +1,16 @@
 import { CONSTANTS } from '../actions/dataActions'
 
 const initialState = {
+  realtorMessages: {
+    isFetching: false,
+    messages: [],
+    errorMessage: '',
+    pageIndex: 1,
+    hasMore: true
+  },
   allRealtors: null,
   errorRealtors: null,
-  fetching: false,
-  currentRealtor: {
-    id: null,
-    messages: null,
-    fetching: false,
-    errorCurrentRealtor: null
-  }
+  fetching: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,23 +34,30 @@ const reducer = (state = initialState, action) => {
     case CONSTANTS.MESSAGES_REQUEST:
       return {
         ...state,
-        currentRealtor: {
-          fetching: true
+        realtorMessages: {
+          ...state.realtorMessages,
+          isFetching: true,
+          pageIndex: action.pageIndex,
+          hasMore: true
         }
       }
     case CONSTANTS.MESSAGES_SUCCESS:
       return {
         ...state,
-        fetching: false,
-        currentRealtor: {
-          messages: action.results
+        realtorMessages: {
+          ...state.realtorMessages,
+          isFetching: false,
+          messages: [...state.realtorMessages.messages, ...action.messages],
+          hasMore: action.hasMore
         }
       }
     case CONSTANTS.MESSAGES_FAILURE:
       return {
         ...state,
-        currentRealtor: {
-          fetching: true
+        realtorMessages: {
+          isFetching: false,
+          errorMessage: action.errorMessage,
+          hasMore: false
         }
       }
     default:
