@@ -15,12 +15,16 @@ function Home(props) {
   const [realtor, setRealtor] = React.useState()
 
   React.useEffect(() => {
-    if (realtorId && props.allRealtors) {
-      const realtor = props.allRealtors.find(a => `${a.id}` === realtorId)
-      setRealtor(realtor)
-    } else if (!realtorId && props.allRealtors) {
-      const realtor = props.allRealtors[0]
-      setRealtor(realtor)
+    if (!props.allRealtors && !props.realtors.isFetching) {
+      props.dataActions.cleanMessages()
+      props.dataActions.getRealtors()
+    }
+  })
+
+  React.useEffect(() => {
+    if (realtorId && props.realtor.id && !props.realtor.isFetching) {
+      console.log(props.realtor)
+      setRealtor(props.realtor)
     }
   })
 
@@ -30,11 +34,13 @@ function Home(props) {
 
   React.useEffect(() => {
     props.dataActions.cleanMessages()
-    props.dataActions.getRealtors()
+    realtorId && props.dataActions.getRealtor(realtorId)
   }, [realtorId])
 
   if (isWidthDown('sm', props.width)) {
-    return (
+    return !realtor ? (
+      <div className={classes.section}>NONE</div>
+    ) : (
       (props.message.id && (
         <div className={classes.rootMobile}>
           <Grid
@@ -76,7 +82,9 @@ function Home(props) {
     )
   }
 
-  return (
+  return !realtor ? (
+    <div className={classes.section}>NONE</div>
+  ) : (
     <div className={classes.root}>
       <Grid
         container
