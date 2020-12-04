@@ -15,59 +15,34 @@ const MessagesListItem = props => {
   const classeRead = message.read ? classes.read : classes.unread
 
   return (
-    <div
-      className={classeRead}
-      style={{
-        borderBottom: '1px solid black',
-        padding: '5px',
-        textDecoration: 'none',
-        color: 'black'
-      }}
-    >
+    <div className={classes.wrapper}>
       <Link
         to={`/realtors/${realtorId}/messages/${message.id}`}
         key={message.id}
-        style={{
-          textDecoration: 'none',
-          color: 'black'
-        }}
       >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row'
-          }}
-        >
-          <Icon>{message.type}</Icon>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'baseline',
-              justifyContent: 'space-between'
-              // width: '100%'
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'baseline'
-              }}
-            >
-              <h4
-                style={{ padding: '0', margin: '0' }}
-              >{`${message.contact.firstname} ${message.contact.lastname}`}</h4>
-
-              {(message.type === 'phone' || message.type === 'sms') &&
-                `(${message.contact['phone']})`}
+        <div className={`${classes.itemMessage} ${classeRead}`}>
+          <div className={`${classes.iconItemMessage} ${classeRead}`}>
+            <Icon>{message.type}</Icon>
+          </div>
+          <div className={classes.contactMessageWrapper}>
+            <div className={classes.nameMessage}>
+              <div className={classes.fontNameMessage}>
+                {`${message.contact.firstname} ${message.contact.lastname}`}
+              </div>
+              <div className={classes.phoneNumber}>
+                {(message.type === 'phone' || message.type === 'sms') &&
+                  `(${message.contact['phone']})`}
+              </div>
             </div>
-            <div>
-              <small>{dateString(message.date)}</small>
+            <div className={classes.subjectMessage}>{message.subject}</div>
+            <div className={classes.bodyMessage}>
+              {`${message.body.slice(0, 80)}...`}
             </div>
           </div>
+          <div className={`${classes.dateMessage} ${classeRead}`}>
+            {dateString(message.date)}
+          </div>
         </div>
-        <div>{`${message.body.slice(0, 100)}...`}</div>
       </Link>
     </div>
   )

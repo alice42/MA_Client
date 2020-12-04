@@ -10,7 +10,7 @@ export const dateString = when => {
     })
   } else
     return new Date(when).toLocaleString(navigator.language, {
-      year: 'numeric',
+      year: '2-digit',
       month: 'numeric',
       day: 'numeric'
     })
@@ -32,6 +32,18 @@ export const shortDate = date => {
   const newDate = a.toLocaleString('default', {
     day: 'numeric',
     month: 'short'
+  })
+  return newDate
+}
+
+export const LongDate = date => {
+  const a = new Date(date)
+  const newDate = a.toLocaleTimeString('default', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
   })
   return newDate
 }

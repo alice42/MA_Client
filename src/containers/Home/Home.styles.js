@@ -20,6 +20,7 @@ export default theme => ({
   },
   section: {
     ...theme.flexColumnCenter,
+    opacity: '0.5',
     marginTop: '38vh'
   },
   messagelist: {
