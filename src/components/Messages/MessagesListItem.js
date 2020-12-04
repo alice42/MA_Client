@@ -12,11 +12,20 @@ const MessagesListItem = props => {
   const history = useHistory()
 
   const { message, realtorId } = props
-  const classeRead = message.read ? classes.read : classes.unread
+  const [classeRead, setClassRead] = React.useState(
+    message.read ? classes.read : classes.unread
+  )
+  const handleRead = () => {
+    if (!message.read) {
+      setClassRead(classes.read)
+      props.dataActions.markMessageRead(realtorId, message)
+    }
+  }
 
   return (
     <div className={classes.wrapper}>
       <Link
+        onClick={handleRead}
         to={`/realtors/${realtorId}/messages/${message.id}`}
         key={message.id}
       >

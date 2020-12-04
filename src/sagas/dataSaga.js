@@ -113,12 +113,10 @@ function* updatePageToFetch(action) {
 function* markAsRead(action) {
   try {
     const payload = {
-      realtorId: action.ids.realtorId,
-      messageId: action.ids.messageId,
-      message: action.results
+      realtorId: action.realtorId,
+      message: action.message
     }
     const response = yield call(markAsReadMethod, payload)
-
     if (response.status === 200) {
       yield put({
         type: CONSTANTS.MESSAGE_READ_SUCCESS,
@@ -142,6 +140,6 @@ export default function* rootSaga() {
     yield takeEvery(CONSTANTS.FETCH_MESSAGES, fetchMessages),
     yield takeEvery(CONSTANTS.FETCH_MESSAGES, updatePageToFetch),
     yield takeEvery(CONSTANTS.MESSAGE_REQUEST, getMessage),
-    yield takeEvery(CONSTANTS.MESSAGE_SUCCESS, markAsRead)
+    yield takeEvery(CONSTANTS.MESSAGE_READ_REQUEST, markAsRead)
   ])
 }

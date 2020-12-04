@@ -112,6 +112,15 @@ const reducer = (state = initialState, action) => {
           isFetching: false
         }
       }
+    case CONSTANTS.MESSAGE_READ_SUCCESS:
+      console.log(state)
+      return {
+        ...state,
+        realtor: {
+          ...state.realtor,
+          unread_messages: state.realtor.unread_messages - 1
+        }
+      }
     case CONSTANTS.CLEAN_MESSAGES:
       return {
         ...state,

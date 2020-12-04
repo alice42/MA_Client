@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReduxLazyScroll from 'redux-lazy-scroll'
-import Post from './MessagesListItem'
+import MessageList from './MessagesListItem'
 
 class MessagesList extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class MessagesList extends Component {
           parentHeight={'calc(100vh - 67px)'}
         >
           {messages.map(message => (
-            <Post
+            <MessageList
               {...this.props}
               key={message.id}
               message={message}
