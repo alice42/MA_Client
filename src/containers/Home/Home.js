@@ -12,19 +12,10 @@ function Home(props) {
   const classes = useStyles()
   const { realtorId, messageId } = useParams()
 
-  const [realtor, setRealtor] = React.useState()
-
   React.useEffect(() => {
     if (!props.allRealtors && !props.realtors.isFetching) {
       props.dataActions.cleanMessages()
       props.dataActions.getRealtors()
-    }
-  })
-
-  React.useEffect(() => {
-    if (realtorId && props.realtor.id && !props.realtor.isFetching) {
-      console.log(props.realtor)
-      setRealtor(props.realtor)
     }
   })
 
@@ -38,8 +29,8 @@ function Home(props) {
   }, [realtorId])
 
   if (isWidthDown('sm', props.width)) {
-    return !realtor ? (
-      <div className={classes.section}>NONE</div>
+    return !props.realtor.id ? (
+      <div className={classes.section}>Selectionnez une agence!</div>
     ) : (
       (props.message.id && (
         <div className={classes.rootMobile}>
@@ -67,11 +58,11 @@ function Home(props) {
           <Grid container>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                {realtor && (
+                {props.realtor && props.realtor.id && (
                   <MessagesList
                     className={classes.messagelist}
                     {...props}
-                    realtor={realtor}
+                    realtor={props.realtor}
                   />
                 )}
               </Paper>
@@ -82,8 +73,8 @@ function Home(props) {
     )
   }
 
-  return !realtor ? (
-    <div className={classes.section}>NONE</div>
+  return !props.realtor.id ? (
+    <div className={classes.section}>Selectionnez une agence!</div>
   ) : (
     <div className={classes.root}>
       <Grid
@@ -94,11 +85,11 @@ function Home(props) {
       >
         <Grid item xs={4}>
           <Paper className={classes.paper}>
-            {realtor && (
+            {props.realtor && props.realtor.id && (
               <MessagesList
                 className={classes.messagelist}
                 {...props}
-                realtor={realtor}
+                realtor={props.realtor}
               />
             )}
           </Paper>
