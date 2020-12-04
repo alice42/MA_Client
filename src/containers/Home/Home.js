@@ -117,7 +117,7 @@ function Home(props) {
             </div>
           )) || (
             <div className={classes.section}>
-              {!props.message.isFetching
+              {!props.message.isFetching || !props.message.id
                 ? "selectionnez sur un message pour l'ouvrir"
                 : 'chargement...'}
             </div>

@@ -26,7 +26,7 @@ const MessagesListItem = props => {
     <div className={classes.wrapper}>
       <Link
         onClick={handleRead}
-        to={`/realtors/${realtorId}/messages/${message.id}`}
+        to={`/realtor/${realtorId}/message/${message.id}`}
         key={message.id}
       >
         <div className={`${classes.itemMessage} ${classeRead}`}>

@@ -12,14 +12,14 @@ const App = props => (
   <BrowserRouter basename="/">
     <LayoutConnected>
       <Switch>
-        <Route exact path={'/realtors'} component={HomeConnected} />
-        <Route exact path={'/realtors/:realtorId'} component={HomeConnected} />
+        <Route exact path={'/'} component={HomeConnected} />
+        <Route exact path={'/realtor/:realtorId'} component={HomeConnected} />
         <Route
           exact
-          path={'/realtors/:realtorId/messages/:messageId'}
+          path={'/realtor/:realtorId/message/:messageId'}
           component={HomeConnected}
         />
-        <Redirect to="/realtors" />
+        <Redirect to="/" />
       </Switch>
     </LayoutConnected>
   </BrowserRouter>
@@ -37,7 +37,7 @@ const mapStateToProps = state => {
     realtors: data,
     realtor: data.realtor,
     allRealtors: data.allRealtors,
-    messageEntity: data.realtorMessages,
+    realtorMessages: data.realtorMessages,
     message: data.message
   }
 }

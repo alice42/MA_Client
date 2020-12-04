@@ -9,7 +9,7 @@ class MessagesList extends Component {
   }
 
   loadMessages() {
-    const { pageIndex } = this.props.messageEntity
+    const { pageIndex } = this.props.realtorMessages
     this.props.dataActions.fetchMessages(pageIndex, this.props.realtor.id)
   }
 
@@ -19,7 +19,7 @@ class MessagesList extends Component {
       isFetching,
       errorMessage,
       hasMore
-    } = this.props.messageEntity
+    } = this.props.realtorMessages
     return (
       <div>
         <ReduxLazyScroll

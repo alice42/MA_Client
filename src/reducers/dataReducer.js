@@ -57,7 +57,9 @@ const reducer = (state = initialState, action) => {
     case CONSTANTS.REALTOR_FAILURE:
       return {
         ...state,
-        isFetching: false
+        realtor: {
+          isFetching: false
+        }
       }
     case CONSTANTS.MESSAGES_REQUEST:
       return {
