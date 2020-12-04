@@ -113,7 +113,6 @@ const reducer = (state = initialState, action) => {
         }
       }
     case CONSTANTS.MESSAGE_READ_SUCCESS:
-      console.log(state)
       return {
         ...state,
         realtor: {
