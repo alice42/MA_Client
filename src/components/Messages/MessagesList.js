@@ -30,10 +30,10 @@ class MessagesList extends Component {
           isParentScrollable={true}
           parentHeight={'calc(100vh - 67px)'}
         >
-          {messages.map(message => (
+          {messages.map((message, index) => (
             <MessageList
               {...this.props}
-              key={message.id}
+              key={`message.id_list_${index}`}
               message={message}
               realtorId={this.props.realtor.id}
             />

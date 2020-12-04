@@ -4,7 +4,8 @@ export const api = 'http://34.76.140.183'
 export const realtors = '/realtors/'
 export const messages = '/messages/'
 
-export const page = '?page='
+export const page = '&page='
+export const dateDesc = '?sort=date%3Adesc&'
 
 //BASIC FETCH API METHOD
 export const basicFetch = async (method, url, config, data) => {

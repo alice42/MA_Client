@@ -1,4 +1,12 @@
-import { basicFetch, api, realtors, messages, page } from './utils'
+import {
+  basicFetch,
+  api,
+  realtors,
+  messages,
+  page,
+  dateDesc,
+  pageSize
+} from './utils'
 
 export const getRealtorsMethod = () =>
   basicFetch('GET', `${api}${realtors}`, {})
@@ -12,14 +20,14 @@ export const getMessageMethod = ({ realtorId, messageId }) =>
 export const fetchMessagesMethod = ({ pageIndex, realtorId }) =>
   basicFetch(
     'GET',
-    `${api}${realtors}${realtorId}${messages}${page}${pageIndex}`,
+    `${api}${realtors}${realtorId}${messages}${dateDesc}${page}${pageIndex}`,
     {}
   )
 
-export const markAsReadMethod = ({ realtorId, message }) =>
+export const markAsReadMethod = ({ realtorId, messageId, message }) =>
   basicFetch(
     'PATCH',
-    `${api}${realtors}${realtorId}${messages}${message.id}`,
+    `${api}${realtors}${realtorId}${messages}${messageId}`,
     {},
     `{
       "subject": "${message.subject}",

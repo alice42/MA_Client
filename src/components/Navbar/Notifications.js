@@ -12,7 +12,7 @@ function Menu(props) {
 
   React.useEffect(() => {
     if (props.realtor.id && !props.realtor.isFetching) {
-      setValue(props.realtor.unread_messages)
+      setValue(props.realtor.unread_messages - 1)
     }
   })
 
