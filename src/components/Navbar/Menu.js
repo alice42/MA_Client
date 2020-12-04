@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import styles from './Navbar.styles'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
-import Dropdown from '../Dropdown'
+import Dropdown from './Dropdown'
 
 const useStyles = makeStyles(styles)
 
