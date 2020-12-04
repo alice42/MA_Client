@@ -5,9 +5,9 @@ export const realtors = '/realtors/'
 export const messages = '/messages/'
 
 export const page = '?page='
+
 //BASIC FETCH API METHOD
 export const basicFetch = async (method, url, config, data) => {
-  // console.log(data)
   try {
     const response = await fetch(url, {
       method: method,

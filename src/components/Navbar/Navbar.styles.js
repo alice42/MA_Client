@@ -2,7 +2,9 @@ export default () => ({
   flex: {
     flexGrow: 1
   },
-  appBar: {},
+  appBar: {
+    background: '#1B5098'
+  },
   logo: {
     paddingTop: '3px'
   },
@@ -15,7 +17,8 @@ export default () => ({
     alignItems: 'center'
   },
   notifications: {
-    background: 'green',
+    background: '#7ED322',
+    color: 'white',
     padding: '1px 10px 1px 10px',
     margin: '0px 0px 0px 10px',
     borderRadius: '5px',

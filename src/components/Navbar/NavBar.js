@@ -12,24 +12,10 @@ import Notifications from './Notifications'
 
 const useStyles = makeStyles(styles)
 
-function ElevationScroll(props) {
-  const { children, window } = props
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-    target: window ? window() : undefined
-  })
-
-  return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0
-  })
-}
-
 export default function Navbar(props) {
   const classes = useStyles()
 
   return (
-    // <ElevationScroll {...props}>
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <Logo className={classes.logo} />
@@ -38,6 +24,5 @@ export default function Navbar(props) {
         <Menu {...props} />
       </Toolbar>
     </AppBar>
-    // </ElevationScroll>
   )
 }

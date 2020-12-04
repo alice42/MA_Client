@@ -18,7 +18,6 @@ export const fetchMessagesMethod = ({ pageIndex, realtorId }) => {
 }
 
 export const markAsReadMethod = ({ realtorId, messageId, message }) => {
-  console.log(realtorId, messageId, message)
   return basicFetch(
     'PATCH',
     `${api}${realtors}${realtorId}${messages}${messageId}`,
