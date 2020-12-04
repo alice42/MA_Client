@@ -39,6 +39,7 @@ const mapStateToProps = state => {
   const { data } = state
   return {
     realtors: data,
+    realtor: data.realtor,
     allRealtors: data.allRealtors,
     messageEntity: data.realtorMessages,
     message: data.message

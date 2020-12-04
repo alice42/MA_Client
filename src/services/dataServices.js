@@ -3,6 +3,9 @@ import { basicFetch, api, realtors, messages, page } from './utils'
 export const getRealtorsMethod = () =>
   basicFetch('GET', `${api}${realtors}`, {})
 
+export const getRealtorMethod = ({ realtorId }) =>
+  basicFetch('GET', `${api}${realtors}${realtorId}`, {})
+
 export const getMessageMethod = ({ realtorId, messageId }) =>
   basicFetch('GET', `${api}${realtors}${realtorId}${messages}${messageId}`, {})
 

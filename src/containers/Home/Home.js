@@ -1,8 +1,8 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useRouteMatch, useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './Home.styles'
-import MessagesList from '../../components/Messages/MessagesList'
+import { MessagesList, Message, Contact } from '../../components/Messages'
 import { Grid, Paper } from '@material-ui/core'
 import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
 
@@ -10,45 +10,28 @@ const useStyles = makeStyles(styles)
 
 function Home(props) {
   const classes = useStyles()
-  const history = useHistory()
-  const paramsRealtorId = history.location.pathname.split('/')[2]
-  const paramsMessageId = history.location.pathname.split('/')[4]
-
-  React.useEffect(() => {
-    !props.allRealtors &&
-      !props.realtors.isFetching &&
-      props.dataActions.getRealtors()
-  })
+  const { realtorId, messageId } = useParams()
 
   const [realtor, setRealtor] = React.useState()
-  const [message, setMessage] = React.useState()
 
   React.useEffect(() => {
-    if (paramsRealtorId && props.allRealtors) {
-      const realtor = props.allRealtors.find(a => `${a.id}` === paramsRealtorId)
+    if (realtorId && props.allRealtors) {
+      const realtor = props.allRealtors.find(a => `${a.id}` === realtorId)
       setRealtor(realtor)
-    } else if (!paramsRealtorId && props.allRealtors) {
+    } else if (!realtorId && props.allRealtors) {
       const realtor = props.allRealtors[0]
       setRealtor(realtor)
     }
   })
 
   React.useEffect(() => {
-    paramsMessageId &&
-      props.dataActions.getMessage(paramsRealtorId, paramsMessageId)
-    setMessage(paramsMessageId)
-  }, [paramsMessageId])
+    messageId && props.dataActions.getMessage(realtorId, messageId)
+  }, [messageId])
 
   React.useEffect(() => {
-    paramsRealtorId && props.dataActions.cleanMessages()
-  }, [paramsRealtorId])
-
-  React.useEffect(() => {
-    paramsRealtorId && props.dataActions.cleanMessages()
-    // if (paramsMessageId) {
-    //   props.dataActions.markMessageRead(paramsRealtorId, paramsMessageId)
-    // }
-  }, [paramsMessageId])
+    props.dataActions.cleanMessages()
+    props.dataActions.getRealtors()
+  }, [realtorId])
 
   if (isWidthDown('sm', props.width)) {
     return (
@@ -61,10 +44,14 @@ function Home(props) {
             alignItems="flex-start"
           >
             <Grid className={classes.gridTitle} item>
-              <Paper className={classes.paper}>{props.message.type}</Paper>
+              <Paper className={classes.paper}>
+                <Contact message={props.message} />
+              </Paper>
             </Grid>
             <Grid className={classes.gridContent} item>
-              <Paper className={classes.paper}>{props.message.body}</Paper>
+              <Paper className={classes.paper}>
+                <Message message={props.message} />
+              </Paper>
             </Grid>
           </Grid>
           {/* <button onClick={() => history.goBack()}>A</button> */}
@@ -118,10 +105,14 @@ function Home(props) {
                 alignItems="flex-start"
               >
                 <Grid className={classes.gridTitle} item>
-                  <Paper className={classes.paper}>{props.message.type}</Paper>
+                  <Paper className={classes.paper}>
+                    <Contact message={props.message} />
+                  </Paper>
                 </Grid>
                 <Grid className={classes.gridContent} item>
-                  <Paper className={classes.paper}>{props.message.body}</Paper>
+                  <Paper className={classes.paper}>
+                    <Message message={props.message} />
+                  </Paper>
                 </Grid>
               </Grid>
             </div>

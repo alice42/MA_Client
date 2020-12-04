@@ -12,6 +12,10 @@ const initialState = {
     pageIndex: 1,
     hasMore: true
   },
+  realtor: {
+    isFetching: false,
+    errorMessages: ''
+  },
   allRealtors: null,
   errorRealtors: null,
   isFetching: false
@@ -35,7 +39,28 @@ const reducer = (state = initialState, action) => {
         ...state,
         isFetching: false
       }
+    case CONSTANTS.REALTOR_REQUEST:
+      return {
+        ...state,
+        realtor: {
+          isFetching: true
+        }
+      }
+    case CONSTANTS.REALTOR_SUCCESS:
+      return {
+        ...state,
+        realtor: {
+          ...action.results,
+          isFetching: false
+        }
+      }
+    case CONSTANTS.REALTOR_FAILURE:
+      return {
+        ...state,
+        isFetching: false
+      }
     case CONSTANTS.MESSAGES_REQUEST:
+      console.log(action)
       return {
         ...state,
         realtorMessages: {
@@ -89,7 +114,20 @@ const reducer = (state = initialState, action) => {
         }
       }
     case CONSTANTS.CLEAN_MESSAGES:
-      return initialState
+      return {
+        ...state,
+        message: {
+          isFetching: false,
+          errorMessage: ''
+        },
+        realtorMessages: {
+          isFetching: false,
+          messages: [],
+          errorMessages: '',
+          pageIndex: 1,
+          hasMore: true
+        }
+      }
 
     default:
       return state
