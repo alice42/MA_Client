@@ -13,11 +13,7 @@ const App = props => (
     <LayoutConnected>
       <Switch>
         <Route exact path={'/realtors'} component={HomeConnected} />
-        <Route
-          exact
-          path={'/realtors/:realtorId/messages'}
-          component={HomeConnected}
-        />
+        <Route exact path={'/realtors/:realtorId/'} component={HomeConnected} />
         <Route
           exact
           path={'/realtors/:realtorId/messages/:messageId'}

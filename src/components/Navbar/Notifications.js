@@ -1,6 +1,5 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { useHistory, useParams } from 'react-router-dom'
 import styles from './Navbar.styles'
 import MailIcon from '@material-ui/icons/Mail'
 

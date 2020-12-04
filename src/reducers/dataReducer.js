@@ -60,7 +60,6 @@ const reducer = (state = initialState, action) => {
         isFetching: false
       }
     case CONSTANTS.MESSAGES_REQUEST:
-      console.log(action)
       return {
         ...state,
         realtorMessages: {

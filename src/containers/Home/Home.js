@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, useRouteMatch, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './Home.styles'
 import { MessagesList, Message, Contact } from '../../components/Messages'
@@ -29,10 +29,10 @@ function Home(props) {
   }, [realtorId])
 
   if (isWidthDown('sm', props.width)) {
-    return !props.realtor.id ? (
+    return !props.realtor.id && !props.realtor.isFetching ? (
       <div className={classes.section}>Selectionnez une agence!</div>
     ) : (
-      (props.message.id && (
+      (props.message.id && props.realtor.id && (
         <div className={classes.rootMobile}>
           <Grid
             container
@@ -73,7 +73,7 @@ function Home(props) {
     )
   }
 
-  return !props.realtor.id ? (
+  return !props.realtor.id && !props.realtor.isFetching ? (
     <div className={classes.section}>Selectionnez une agence!</div>
   ) : (
     <div className={classes.root}>
@@ -95,7 +95,7 @@ function Home(props) {
           </Paper>
         </Grid>
         <Grid item xs={8}>
-          {(props.message.id && (
+          {(props.message.id && props.realtor.id && (
             <div className={classes.rootDesktop}>
               <Grid
                 container
