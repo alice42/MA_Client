@@ -17,17 +17,18 @@ export const getRealtorMethod = ({ realtorId }) =>
 export const getMessageMethod = ({ realtorId, messageId }) =>
   basicFetch('GET', `${api}${realtors}${realtorId}${messages}${messageId}`, {})
 
-export const fetchMessagesMethod = ({ pageIndex, realtorId }) =>
-  basicFetch(
+export const fetchMessagesMethod = ({ pageIndex, realtorId }) => {
+  return basicFetch(
     'GET',
     `${api}${realtors}${realtorId}${messages}${dateDesc}${page}${pageIndex}`,
     {}
   )
+}
 
-export const markAsReadMethod = ({ realtorId, messageId, message }) =>
-  basicFetch(
+export const markAsReadMethod = ({ realtorId, message }) => {
+  return basicFetch(
     'PATCH',
-    `${api}${realtors}${realtorId}${messages}${messageId}`,
+    `${api}${realtors}${realtorId}${messages}${message.id}`,
     {},
     `{
       "subject": "${message.subject}",
@@ -43,3 +44,4 @@ export const markAsReadMethod = ({ realtorId, messageId, message }) =>
       "read": true
     }`
   )
+}
