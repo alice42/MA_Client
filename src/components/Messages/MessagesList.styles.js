@@ -1,5 +1,4 @@
 export default () => ({
-  // listitemmessage
   read: {
     color: 'black !important',
     opacity: '0.6'

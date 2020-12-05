@@ -52,7 +52,6 @@ function Home(props) {
               </Paper>
             </Grid>
           </Grid>
-          {/* <button onClick={() => history.goBack()}>A</button> */}
         </div>
       )) || (
         <div className={classes.root}>

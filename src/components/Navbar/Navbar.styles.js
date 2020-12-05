@@ -11,7 +11,8 @@ export default theme => ({
   logoMobile: {
     transform: 'scale(0.8)',
     marginLeft: '-25px',
-    marginRight: '-27px'
+    marginRight: '-27px',
+    marginTop: '4px'
   },
   logo: {
     paddingTop: '3px'
@@ -55,7 +56,16 @@ export default theme => ({
     alignItems: 'center',
     padding: '0 45px 0 10px',
     background: '#114080',
-    borderLeft: '2px solid white'
+    borderLeft: '2px solid white',
+    width: '67px'
+  },
+  dropDownWrapperMedium: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 45px 0 10px',
+    background: '#114080',
+    borderLeft: '2px solid white',
+    width: '97px'
   },
   dropDownListWrapper: {
     zIndex: '1',

@@ -19,7 +19,7 @@ function Menu(props) {
   }
 
   const handleDropDown = e => {
-    props.openDropdown(e)
+    props.openDropdown()
   }
   if (isWidthDown('sm', props.width)) {
     return (

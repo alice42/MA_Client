@@ -1,7 +1,7 @@
 import React from 'react'
 import { dateString } from '../../utils'
 import { Icon } from '@material-ui/core'
-import { useHistory, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './MessagesList.styles'
 

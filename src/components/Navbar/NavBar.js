@@ -37,7 +37,10 @@ const Navbar = props => {
   }
 
   const openDropdown = e => setOpen(!open)
-
+  const handleClickAway = e => {
+    e.preventDefault()
+    setOpen(false)
+  }
   if (isWidthDown('sm', props.width)) {
     let classesLogo = classes.logo
     let classesNotif = classes.notifications
@@ -68,7 +71,7 @@ const Navbar = props => {
 
         {open && (
           <div className={`${classes.appBarSpacer} ${classesList}`}>
-            <ClickAwayListener onClickAway={() => setOpen(false)}>
+            <ClickAwayListener onClickAway={handleClickAway}>
               <ul className={classes.listDropMobile}>
                 {props.allRealtors &&
                   props.allRealtors.map((realtor, index) => (
