@@ -1,6 +1,7 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
+import Paper from '@material-ui/core/Toolbar'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './Navbar.styles'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'

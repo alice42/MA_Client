@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './Navbar.styles'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
 import { KeyboardArrowDown } from '@material-ui/icons'
 
@@ -9,6 +10,13 @@ const useStyles = makeStyles(styles)
 
 function Menu(props) {
   const classes = useStyles()
+  function toggleSelect() {
+    if (store.classList[0] === 'hidden') {
+      store.classList = 'viewfull'
+    } else {
+      store.classList = 'hidden'
+    }
+  }
 
   const handleDropDown = e => {
     props.openDropdown(e)
