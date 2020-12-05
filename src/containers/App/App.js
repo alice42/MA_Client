@@ -15,7 +15,7 @@ import Layout from '../../components/Layout'
 import Home from '../Home'
 
 const App = props => (
-  <BrowserRouter HashRouter basename="/">
+  <BrowserRouter basename="/">
     <LayoutConnected>
       <Switch>
         <Route exact path={'/'} component={HomeConnected} />
