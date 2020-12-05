@@ -23,9 +23,19 @@ function Menu(props) {
   }
   if (isWidthDown('sm', props.width)) {
     return (
-      <div className={classes.menuNavBarMobile}>
-        <AccountCircleIcon />
-      </div>
+      <>
+        <div className={classes.menuNavBarMobile}>
+          <div>
+            <AccountCircleIcon style={{ height: 'inherit' }} />
+          </div>
+          <div>
+            <KeyboardArrowDown
+              style={{ height: 'inherit' }}
+              onClick={e => handleDropDown(e)}
+            />
+          </div>
+        </div>
+      </>
     )
   }
 

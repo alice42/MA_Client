@@ -20,7 +20,8 @@ export const CONSTANTS = {
   MESSAGE_READ_FAILURE: 'MESSAGE_READ_FAILURE',
 
   FETCH_MESSAGES: 'FETCH_MESSAGES',
-  CLEAN_MESSAGES: 'CLEAN_MESSAGES'
+  CLEAN_MESSAGES: 'CLEAN_MESSAGES',
+  CLEAN_MESSAGE: 'CLEAN_MESSAGE'
 }
 
 export const getRealtors = () => ({
@@ -62,6 +63,10 @@ export const getMessage = (realtorId, messageId) => ({
 
 export const cleanMessages = () => ({
   type: CONSTANTS.CLEAN_MESSAGES
+})
+
+export const cleanMessage = () => ({
+  type: CONSTANTS.CLEAN_MESSAGE
 })
 
 export const markMessageRead = (realtorId, message) => ({

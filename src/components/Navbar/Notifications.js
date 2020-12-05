@@ -17,7 +17,7 @@ function Menu(props) {
   })
 
   return (
-    <div className={classes.notifications}>
+    <div className={props.classesNotif}>
       <MailIcon />
       <span style={{ paddingLeft: '3px' }}>{value}</span>
     </div>

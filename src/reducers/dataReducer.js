@@ -137,6 +137,14 @@ const reducer = (state = initialState, action) => {
           hasMore: true
         }
       }
+    case CONSTANTS.CLEAN_MESSAGE:
+      return {
+        ...state,
+        message: {
+          isFetching: false,
+          errorMessage: ''
+        }
+      }
 
     default:
       return state
