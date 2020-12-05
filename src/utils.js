@@ -1,39 +1,32 @@
-export const todayStr = new Date().toISOString().replace(/T.*$/, '')
-
 export const dateString = when => {
-  if (new Date(when).getDate() === new Date(todayStr).getDate() - 1)
-    return 'Hier'
-  else if (new Date(when).getDate() === new Date(todayStr).getDate()) {
+  const date = new Date(when).getTime()
+  const today = new Date()
+  const yesterdayDate = new Date()
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1)
+  const yesterday = new Date(yesterdayDate).getTime()
+  const thisWeekDateMax = new Date()
+  thisWeekDateMax.setDate(thisWeekDateMax.getDate() - 7)
+  const thisWeek = new Date(thisWeekDateMax).getTime()
+
+  if (new Date(when).toLocaleDateString() === today.toLocaleDateString()) {
     return new Date(when).toLocaleTimeString(navigator.language, {
       hour: '2-digit',
       minute: '2-digit'
     })
+  } else if (date === yesterday) {
+    return 'Hier'
+  } else if (date >= thisWeek) {
+    const weekday = new Date(date).toLocaleDateString(navigator.language, {
+      weekday: 'long'
+    })
+
+    return weekday
   } else
     return new Date(when).toLocaleString(navigator.language, {
       year: '2-digit',
       month: 'numeric',
       day: 'numeric'
     })
-}
-
-export const daysFromToday = endDate => {
-  const diffInMs = new Date(endDate) - new Date(todayStr)
-  const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
-  const pluralDays = Math.abs(diffInDays) > 1 ? 'days' : 'day'
-  return Math.sign(diffInDays) < 0
-    ? `${Math.abs(diffInDays)} ${pluralDays} ago`
-    : Math.abs(diffInDays) === 0
-    ? `Today`
-    : `${diffInDays} ${pluralDays} left`
-}
-
-export const shortDate = date => {
-  const a = new Date(date)
-  const newDate = a.toLocaleString('default', {
-    day: 'numeric',
-    month: 'short'
-  })
-  return newDate
 }
 
 export const LongDate = date => {
