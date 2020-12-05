@@ -3,13 +3,19 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as dataActions from '../../actions/dataActions'
 
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
+  HashRouter
+} from 'react-router-dom'
 
 import Layout from '../../components/Layout'
 import Home from '../Home'
 
 const App = props => (
-  <BrowserRouter basename="/">
+  <BrowserRouter HashRouter basename="/">
     <LayoutConnected>
       <Switch>
         <Route exact path={'/'} component={HomeConnected} />
