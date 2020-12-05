@@ -1,42 +1,134 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './Home.styles'
+import { MessagesList, Message, Contact } from '../../components/Messages'
+import { Grid, Paper } from '@material-ui/core'
+import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
 
 const useStyles = makeStyles(styles)
 
 function Home(props) {
   const classes = useStyles()
-  const history = useHistory()
-  const paramsId = history.location.pathname.substring(1)
+  const { realtorId, messageId } = useParams()
 
   React.useEffect(() => {
-    !props.allRealtors &&
-      !props.realtors.fetching &&
+    if (!props.allRealtors && !props.realtors.isFetching) {
+      props.dataActions.cleanMessages()
       props.dataActions.getRealtors()
-  })
-
-  const [realtor, setRealtor] = React.useState()
-
-  React.useEffect(() => {
-    if (paramsId && props.allRealtors) {
-      const a = props.allRealtors.find(a => `${a.id}` === paramsId)
-      setRealtor(a)
     }
   })
 
   React.useEffect(() => {
-    console.log('REACLTOR ID CHANGED', realtor)
-    // realtor && props.dataActions.getMessages(realtor.id)
-  }, [realtor])
+    messageId && props.dataActions.getMessage(realtorId, messageId)
+  }, [messageId])
 
-  return (
+  React.useEffect(() => {
+    props.dataActions.cleanMessages()
+    realtorId && props.dataActions.getRealtor(realtorId)
+  }, [realtorId])
+
+  if (isWidthDown('sm', props.width)) {
+    return !props.realtor.id && !props.realtor.isFetching ? (
+      <div className={classes.section}>Selectionnez une agence!</div>
+    ) : (
+      (props.message.id && props.realtor.id && (
+        <div className={classes.rootMobile}>
+          <Paper />
+          <Grid
+            container
+            direction="column"
+            justify="flex-start"
+            alignItems="flex-start"
+          >
+            <Grid className={classes.gridTitle} item>
+              <Paper className={classes.paper}>
+                <Contact message={props.message} />
+              </Paper>
+            </Grid>
+            <Grid className={classes.gridContent} item>
+              <Paper className={classes.paper}>
+                <Message message={props.message} />
+              </Paper>
+            </Grid>
+          </Grid>
+        </div>
+      )) || (
+        <div className={classes.root}>
+          <Grid container>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                {props.realtor && props.realtor.id && (
+                  <MessagesList
+                    className={classes.messagelist}
+                    {...props}
+                    realtor={props.realtor}
+                  />
+                )}
+              </Paper>
+            </Grid>
+          </Grid>
+        </div>
+      )
+    )
+  }
+
+  return !props.realtor.id && !props.realtor.isFetching ? (
+    <div className={classes.section}>Selectionnez une agence!</div>
+  ) : (
     <div className={classes.root}>
-      <div className={classes.section}>
-        {realtor && <div>ID: {realtor.id}</div>}
-      </div>
+      <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+      >
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>
+            {props.realtor && props.realtor.id && (
+              <MessagesList
+                className={classes.messagelist}
+                {...props}
+                realtor={props.realtor}
+              />
+            )}
+          </Paper>
+        </Grid>
+        <Grid item xs={8}>
+          {(props.message.id && props.realtor.id && (
+            <div className={classes.rootDesktop}>
+              <Grid
+                container
+                direction="column"
+                justify="flex-start"
+                alignItems="flex-start"
+              >
+                <Grid className={classes.gridTitle} item>
+                  <Paper
+                    className={classes.paper}
+                    style={{ overflow: 'scroll' }}
+                  >
+                    <Contact message={props.message} />
+                  </Paper>
+                </Grid>
+                <Grid className={classes.gridContent} item>
+                  <Paper className={classes.paper}>
+                    <Message message={props.message} />
+                  </Paper>
+                </Grid>
+              </Grid>
+            </div>
+          )) || (
+            <div className={classes.section}>
+              {!props.message.isFetching || !props.message.id
+                ? "selectionnez sur un message pour l'ouvrir"
+                : 'chargement...'}
+            </div>
+          )}
+        </Grid>
+      </Grid>
     </div>
   )
 }
 
-export default Home
+export default withWidth()(Home)

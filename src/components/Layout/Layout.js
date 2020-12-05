@@ -10,6 +10,7 @@ function Layout(props) {
   return (
     <div className={classes.container}>
       <Navbar {...props} />
+      <div className={classes.appBarSpacer} />
       <div className={classes.children}>{props.children}</div>
     </div>
   )

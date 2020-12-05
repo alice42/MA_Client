@@ -13,7 +13,12 @@ const App = props => (
     <LayoutConnected>
       <Switch>
         <Route exact path={'/'} component={HomeConnected} />
-        <Route exact path={'/:realtorsId'} component={HomeConnected} />
+        <Route exact path={'/realtor/:realtorId'} component={HomeConnected} />
+        <Route
+          exact
+          path={'/realtor/:realtorId/message/:messageId'}
+          component={HomeConnected}
+        />
         <Redirect to="/" />
       </Switch>
     </LayoutConnected>
@@ -29,8 +34,11 @@ const actionsMapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   const { data } = state
   return {
+    realtors: data,
+    realtor: data.realtor,
     allRealtors: data.allRealtors,
-    realtors: data
+    realtorMessages: data.realtorMessages,
+    message: data.message
   }
 }
 
