@@ -9,7 +9,6 @@ const useStyles = makeStyles(styles)
 
 const MessagesListItem = props => {
   const classes = useStyles()
-  const history = useHistory()
 
   const { message, realtorId } = props
   const [classeRead, setClassRead] = React.useState(

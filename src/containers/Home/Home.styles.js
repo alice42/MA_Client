@@ -1,6 +1,5 @@
 export default theme => ({
-  root: { marginTop: '10vh', height: '100vh' },
-  rootMobile: { marginTop: '10vh', height: '100vh', padding: '10px' },
+  rootMobile: { height: '100vh', padding: '10px' },
   rootDesktop: {
     ...theme.flexColumnCenter,
     width: 'inherit',

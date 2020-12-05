@@ -34,6 +34,7 @@ function Home(props) {
     ) : (
       (props.message.id && props.realtor.id && (
         <div className={classes.rootMobile}>
+          <Paper />
           <Grid
             container
             direction="column"
@@ -104,7 +105,10 @@ function Home(props) {
                 alignItems="flex-start"
               >
                 <Grid className={classes.gridTitle} item>
-                  <Paper className={classes.paper}>
+                  <Paper
+                    className={classes.paper}
+                    style={{ overflow: 'scroll' }}
+                  >
                     <Contact message={props.message} />
                   </Paper>
                 </Grid>
