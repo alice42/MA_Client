@@ -1,5 +1,5 @@
 //api
-export const api = 'http://34.76.140.183'
+export const api = 'https://34.76.140.183'
 
 export const realtors = '/realtors/'
 export const messages = '/messages/'
