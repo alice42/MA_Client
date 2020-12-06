@@ -19,7 +19,7 @@ const Contact = ({ message }) => {
         <div className={classes.contactDetails}>
           <div>Email:</div>
           <div className={classes.contactDetailsValue}>
-            {message.contact['mail']}
+            {message.contact['email']}
           </div>
         </div>
         <div className={classes.contactDetails}>
